@@ -12,7 +12,7 @@ services:
       DB_HOST: 'db'
       DB_PASSWORD: 'root'
     ports:
-      - '4001:3000'
+      - '4001:3001'
     volumes:
       - ./server:/server
 
