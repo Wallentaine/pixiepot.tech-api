@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  server:
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: ./docker/prod/Dockerfile
+    environment:
+      NODE_ENV: production
+      DB_HOST: 'db'
+      DB_PASSWORD: 'root'
+    ports:
+      - '4001:3001'
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_PASSWORD: root
+      POSTGRES_USER: root
+      POSTGRES_DB: pixiepot
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./tmp/db-data:/var/lib/postgresql/data
