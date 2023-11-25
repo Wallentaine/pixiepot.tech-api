@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   server:
@@ -9,10 +9,13 @@ services:
       dockerfile: ./docker/dev/Dockerfile
     environment:
       NODE_ENV: development
-      DB_HOST: 'db'
-      DB_PASSWORD: 'root'
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: "root"
+      DB_PASSWORD: "root"
+      DB_NAME: "pixiepot"
     ports:
-      - '4001:3001'
+      - "4001:3001"
     volumes:
       - ./server:/server
 
@@ -23,6 +26,6 @@ services:
       POSTGRES_USER: root
       POSTGRES_DB: pixiepot
     ports:
-      - '5432:5432'
+      - "5432:5432"
     volumes:
       - ./tmp/db-data:/var/lib/postgresql/data
