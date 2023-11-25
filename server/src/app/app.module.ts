@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { options } from '../modules/db/typeorm.config';
 import * as Joi from 'joi';
+import { WeightDataModule } from 'src/modules/weight-data/weight-data.module';
+import { DataSource } from 'typeorm';
 
 @Module({
   imports: [
@@ -19,8 +21,11 @@ import * as Joi from 'joi';
       }),
     }),
     TypeOrmModule.forRootAsync(options()),
+    WeightDataModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private dataSource: DataSource) {}
+}

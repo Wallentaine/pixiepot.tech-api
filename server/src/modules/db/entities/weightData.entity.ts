@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('weightData')
+@Entity('weight_data')
 export class WeightData {
   @PrimaryGeneratedColumn()
   id: number;
