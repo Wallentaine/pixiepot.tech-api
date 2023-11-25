@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { options } from '../db/typeorm.config';
+import { options } from '../modules/db/typeorm.config';
 import * as Joi from 'joi';
 
 @Module({
