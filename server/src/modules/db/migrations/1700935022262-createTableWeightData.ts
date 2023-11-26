@@ -99,6 +99,12 @@ export class CreateTableWeightData1700935022262 implements MigrationInterface {
             type: 'int',
             isNullable: false,
           },
+          {
+            name: 'telegramToken',
+            type: 'varchar',
+            length: '128',
+            isNullable: true,
+          },
         ],
       }),
       true

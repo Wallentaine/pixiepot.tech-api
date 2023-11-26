@@ -12,8 +12,12 @@ export class EmployeeController {
   ) {}
 
   @Get()
-  public getEmployees() {}
+  public async getEmployees() {
+    return await this.employeeService.getEmployees();
+  }
 
   @Get(':id')
-  public getEmployeeById(@Param() employeeId: number) {}
+  public async getEmployeeById(@Param('id') employeeId: number) {
+    return await this.employeeService.getEmployeeById(employeeId);
+  }
 }

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { options } from '../modules/db/typeorm.config';
 import * as Joi from 'joi';
-import { WeightDataModule } from 'src/modules/weight-data/weight-data.module';
 import { DataSource } from 'typeorm';
+import { EmployeeModule } from 'src/modules/employee/employee.module';
+import { StatisticModule } from 'src/modules/statistic/statistic.module';
+import { ProjectModule } from 'src/modules/project/project.module';
 
 @Module({
   imports: [
@@ -21,10 +21,12 @@ import { DataSource } from 'typeorm';
       }),
     }),
     TypeOrmModule.forRootAsync(options()),
-    WeightDataModule,
+    EmployeeModule,
+    StatisticModule,
+    ProjectModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {
   constructor(private dataSource: DataSource) {}

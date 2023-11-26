@@ -45,20 +45,17 @@ export class Init1700875729543 implements MigrationInterface {
           },
           {
             name: 'birthDate',
-            type: 'varchar',
-            length: '128',
+            type: 'timestamp',
             isNullable: false,
           },
           {
             name: 'expirience',
-            type: 'varchar',
-            length: '128',
+            type: 'int',
             isNullable: false,
           },
           {
             name: 'burnoutPercent',
-            type: 'varchar',
-            length: '128',
+            type: 'int',
             isNullable: false,
           },
         ],

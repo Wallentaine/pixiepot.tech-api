@@ -10,9 +10,9 @@ export class Project {
   @Column()
   name: string;
 
-  @OneToMany(() => EmployeeProject, (employeeProjects) => employeeProjects.projectId)
-  employeeProjects: EmployeeProject[];
+  @OneToMany(() => EmployeeProject, (employeeProject) => employeeProject.project)
+  employeeProject: EmployeeProject[];
 
-  @OneToMany(() => Statistic, (statistic) => statistic.employeeId)
-  statistics: Statistic[];
+  @OneToMany(() => Statistic, (statistic) => statistic.project)
+  statistic: Statistic[];
 }

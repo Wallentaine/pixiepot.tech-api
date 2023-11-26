@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { StatisticController } from './statistic.controller';
 import { StatisticService } from './statistic.service';
-import { WeightDataModule } from '../weight-data/weight-data.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Statistic } from '../db/entities/statistic.entity';
+import { WeightData } from '../db/entities/weightData.entity';
 
 @Module({
-  imports: [WeightDataModule],
+  imports: [TypeOrmModule.forFeature([Statistic]), TypeOrmModule.forFeature([WeightData])],
   controllers: [StatisticController],
   providers: [StatisticService],
+  exports: [],
 })
 export class StatisticModule {}

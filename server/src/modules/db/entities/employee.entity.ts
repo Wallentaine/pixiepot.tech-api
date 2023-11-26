@@ -34,6 +34,6 @@ export class Employee {
   @OneToMany(() => Statistic, (statistic) => statistic.employeeId)
   statistics: Statistic[];
 
-  @OneToMany(() => EmployeeProject, (employeeProjects) => employeeProjects.employeeId)
-  employeeProjects: EmployeeProject[];
+  @OneToMany(() => EmployeeProject, (employeeProject) => employeeProject.employee)
+  employeeProject: EmployeeProject[];
 }

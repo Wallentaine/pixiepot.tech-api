@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 't
 import { Employee } from './employee.entity';
 import { Project } from './project.entity';
 
-@Entity('employeeProject')
+@Entity('employee_project')
 export class EmployeeProject {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,11 +19,11 @@ export class EmployeeProject {
   @Column()
   leaveDate: Date;
 
-  @ManyToOne(() => Employee, (employee) => employee)
+  @ManyToOne(() => Employee, (employee) => employee.employeeProject)
   @JoinColumn({ name: 'employeeId' })
   employee: Employee;
 
-  @ManyToOne(() => Project, (project) => project)
+  @ManyToOne(() => Project, (project) => project.employeeProject)
   @JoinColumn({ name: 'projectId' })
   project: Project;
 }

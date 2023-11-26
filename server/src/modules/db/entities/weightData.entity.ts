@@ -55,4 +55,7 @@ export class WeightData {
 
   @Column()
   countOutstandingTask: number;
+
+  @Column()
+  telegramToken: string;
 }
