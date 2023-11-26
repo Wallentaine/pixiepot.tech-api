@@ -104,6 +104,7 @@ export class CreateTableWeightData1700935022262 implements MigrationInterface {
             type: 'varchar',
             length: '128',
             isNullable: true,
+            default: '',
           },
         ],
       }),

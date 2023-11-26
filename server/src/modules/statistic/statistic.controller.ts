@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AddStatisticDto } from './dto/add-statistic.dto';
 import { StatisticService } from './statistic.service';
+import { WeightDataDto } from './dto/weight-data.dto';
 
 @Controller('statistic')
 export class StatisticController {
@@ -9,6 +10,11 @@ export class StatisticController {
   @Post()
   public async addStatistic(@Body() addStatisticDto: AddStatisticDto) {
     await this.statisticService.addStatistic(addStatisticDto);
+  }
+
+  @Post('weight-data')
+  public async addWeightData(@Body() weightDataDto: WeightDataDto) {
+    await this.statisticService.addWeightData(weightDataDto);
   }
 
   @Get()

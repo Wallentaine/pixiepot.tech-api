@@ -7,6 +7,7 @@ import { Metrics } from 'src/utils/types/calculate-burnout.types';
 import { WeightData } from '../db/entities/weightData.entity';
 import calculateBurnout from 'src/utils/calculate-burnout.utils';
 import commonUtils from 'src/utils/common.utils';
+import { WeightDataDto } from './dto/weight-data.dto';
 
 @Injectable()
 export class StatisticService {
@@ -19,6 +20,19 @@ export class StatisticService {
     try {
       await this.statisticRepository.manager.transaction(async (transactionEntityManager) => {
         transactionEntityManager.insert('statistic', { ...addStatisticDto });
+      });
+    } catch (error) {
+      new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  public async addWeightData(weightDataDto: WeightDataDto) {
+    try {
+      await this.statisticRepository.manager.transaction(async (transactionEntityManager) => {
+        transactionEntityManager.queryRunner.query(`
+        INSERT INTO weight_data ("countMessage", "countCharInMessage", "countCommits", "countChangedCode", "countHoursInApps", "countTasks", "countDaysOnTask", "lastUpGradeDate", "countWorkYearInCompany", "countCall", "callDuration", "countWorkHours", "countWorkHoursOver", "countDaysSickTime", "countMissDeadline", "countOutstandingTask")
+        VALUES (${weightDataDto.countMessage}, ${weightDataDto.countCharInMessage}, ${weightDataDto.countCommits}, ${weightDataDto.countChangedCode}, ${weightDataDto.countHoursInApps}, ${weightDataDto.countTasks}, ${weightDataDto.countDaysOnTask}, '${weightDataDto.lastUpGradeDate}', ${weightDataDto.countWorkYearInCompany}, ${weightDataDto.countCall}, ${weightDataDto.callDuration}, ${weightDataDto.countWorkHours}, ${weightDataDto.countWorkHoursOver}, ${weightDataDto.countDaysSickTime}, ${weightDataDto.countMissDeadline}, ${weightDataDto.countOutstandingTask});
+      `);
       });
     } catch (error) {
       new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -182,6 +196,7 @@ export class StatisticService {
           burnout: avgBurnout,
           date: combinedStatisticByEmployee.get(key)[0].date,
           project: combinedStatisticByEmployee.get(key)[0].project.name,
+          employee: combinedStatisticByEmployee.get(key)[0].employee,
         });
       }
 
@@ -273,11 +288,14 @@ export class StatisticService {
             .reduce((accum, current) => (accum += current), 0) / combinedStatisticByEmployee.get(key).length
         );
 
+        console.log(combinedStatisticByEmployee.get(key)[0].employee);
+
         preparedData.push({
           id_epmloyee: combinedStatisticByEmployee.get(key)[0].id,
           burnout: avgBurnout,
           date: combinedStatisticByEmployee.get(key)[0].date,
           project: combinedStatisticByEmployee.get(key)[0].project.name,
+          employee: combinedStatisticByEmployee.get(key)[0].employee,
         });
       }
 
