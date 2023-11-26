@@ -79,12 +79,13 @@ export class StatisticService {
         countOutstandingTask: todayMetric.countOutstandingTask,
       };
 
-      const averagePercent =
+      const averagePercent = Math.floor(
         preparedStatistics
           .map((statisticEntity) => {
             return calculateBurnout.getClearPercent(statisticEntity, preparedTodayMetrics);
           })
-          .reduce((accum, current) => (accum += current), 0) / preparedStatistics.length;
+          .reduce((accum, current) => (accum += current), 0) / preparedStatistics.length
+      );
 
       return averagePercent;
     } catch (error) {
@@ -147,7 +148,7 @@ export class StatisticService {
       const preparedData = [];
 
       for (const key of combinedStatisticByEmployee.keys()) {
-        const avgBurnout =
+        const avgBurnout = Math.floor(
           combinedStatisticByEmployee
             .get(key)
             .map((statisticEntity) => {
@@ -173,7 +174,8 @@ export class StatisticService {
                 preparedTodayMetrics
               );
             })
-            .reduce((accum, current) => (accum += current), 0) / combinedStatisticByEmployee.get(key).length;
+            .reduce((accum, current) => (accum += current), 0) / combinedStatisticByEmployee.get(key).length
+        );
 
         preparedData.push({
           id_epmloyee: combinedStatisticByEmployee.get(key)[0].id,
@@ -242,7 +244,7 @@ export class StatisticService {
       const preparedData = [];
 
       for (const key of combinedStatisticByEmployee.keys()) {
-        const avgBurnout =
+        const avgBurnout = Math.floor(
           combinedStatisticByEmployee
             .get(key)
             .map((statisticEntity) => {
@@ -268,7 +270,8 @@ export class StatisticService {
                 preparedTodayMetrics
               );
             })
-            .reduce((accum, current) => (accum += current), 0) / combinedStatisticByEmployee.get(key).length;
+            .reduce((accum, current) => (accum += current), 0) / combinedStatisticByEmployee.get(key).length
+        );
 
         preparedData.push({
           id_epmloyee: combinedStatisticByEmployee.get(key)[0].id,
